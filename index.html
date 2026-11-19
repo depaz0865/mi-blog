@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roberto Carlos Delgado Depaz — Ingeniería de Sistemas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --surface-subtle: #f1f5f9;
+            --text: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --border-strong: #cbd5e1;
+            --primary: #0f172a;
+            --primary-text: #ffffff;
+            --accent: #1d4ed8;
+            --accent-soft: #eff6ff;
+            --emerald: #059669;
+            --emerald-soft: #ecfdf5;
+            --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+            --shadow-md: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 20px 40px -15px rgba(15, 23, 42, 0.12);
+        }
+
+        [data-theme="dark"] {
+            --bg: #0b0f19;
+            --surface: #111827;
+            --surface-subtle: #1f2937;
+            --text: #f9fafb;
+            --text-secondary: #d1d5db;
+            --text-muted: #9ca3af;
+            --border: #1f2937;
+            --border-strong: #374151;
+            --primary: #f9fafb;
+            --primary-text: #0b0f19;
+            --accent: #60a5fa;
+            --accent-soft: rgba(59, 130, 246, 0.14);
+            --emerald: #34d399;
+            --emerald-soft: rgba(16, 185, 129, 0.14);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 20px 40px -15px rgba(0, 0, 0, 0.65);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Header Superior Institucional */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(248, 250, 252, 0.82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s ease;
+        }
+
+        [data-theme="dark"] .navbar {
+            background: rgba(11, 15, 25, 0.82);
+        }
+
+        .navbar-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0.9rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-monogram {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            background: var(--primary);
+            color: var(--primary-text);
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .theme-toggle {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.48rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--border-strong);
+            background: var(--surface-subtle);
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 5rem;
+        }
+
+        /* Hero Ejecutivo Asimétrico */
+        .hero-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.75rem;
+            box-shadow: var(--shadow-md);
+            display: grid;
+            grid-template-columns: 1fr 220px;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 2.25rem;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 0.35rem 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-size: clamp(1.85rem, 3.5vw, 2.65rem);
+            font-weight: 700;
+            letter-spacing: -0.035em;
+            line-height: 1.12;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero-editorial {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 1.32rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.1rem;
+            line-height: 1.4;
+        }
+
+        .hero-summary {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            max-width: 640px;
+            margin-bottom: 1.65rem;
+        }
+
+        .link-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.58rem 1.05rem;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-link:hover {
+            border-color: var(--border-strong);
+            background: var(--surface-subtle);
+            transform: translateY(-1px);
+        }
+
+        .btn-link.primary {
+            background: var(--primary);
+            color: var(--primary-text);
+            border-color: var(--primary);
+        }
+
+        .btn-link.primary:hover {
+            opacity: 0.92;
+        }
+
+        .photo-wrapper {
+            position: relative;
+        }
+
+        .photo-card {
+            width: 220px;
+            height: 255px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            background: var(--surface-subtle);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-caption {
+            margin-top: 0.65rem;
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Sistema de Pestañas Profesionales */
+        .tabs-header {
+            display: flex;
+            gap: 0.35rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 1px;
+        }
+
+        .tab-trigger {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            padding: 0.85rem 1.25rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-trigger:hover {
+            color: var(--text);
+        }
+
+        .tab-trigger.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+            font-weight: 600;
+        }
+
+        .tab-count {
+            font-size: 0.72rem;
+            background: var(--surface-subtle);
+            color: var(--text-secondary);
+            padding: 0.12rem 0.48rem;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+
+        .tab-trigger.active .tab-count {
+            background: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeSlide 0.32s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Grids y Tarjetas */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .panel-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.85rem;
+            box-shadow: var(--shadow-sm);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .panel-card:hover {
+            border-color: var(--border-strong);
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-kicker {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .panel-card h3 {
+            font-size: 1.18rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .panel-card p {
+            color: var(--text-secondary);
+            font-size: 0.94rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .panel-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Lista Estructurada de Estudios */
+        .edu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.35rem;
+        }
+
+        .edu-item {
+            padding-bottom: 1.35rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edu-item:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .edu-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .edu-title {
+            font-weight: 600;
+            font-size: 1.02rem;
+        }
+
+        .edu-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            background: var(--emerald-soft);
+            color: var(--emerald);
+            white-space: nowrap;
+        }
+
+        .edu-org {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        /* Barras de Habilidades Profesionales */
+        .skill-row {
+            margin-bottom: 1.15rem;
+        }
+        .skill-row:last-child { margin-bottom: 0; }
+        .skill-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.88rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+        .skill-meta span:last-child {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+        .progress-track {
+            height: 7px;
+            background: var(--surface-subtle);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 999px;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag-pill {
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: var(--surface-subtle);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.75rem;
+            border-radius: 7px;
+        }
+
+        /* Proyectos con botón de detalle */
+        .project-footer {
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .detail-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .detail-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Sección Inferior Profesional Fija (Info + Contacto) */
+        .bottom-profile {
+            margin-top: 3rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.25rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .bottom-col h4 {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-bottom: 0.85rem;
+        }
+
+        .bottom-col p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .contact-list li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .copy-chip {
+            font-size: 0.75rem;
+            background: var(--surface-subtle);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .copy-chip:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .sub-footer {
+            margin-top: 1.75rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* Modal de Proyecto */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(4px);
+            display: none;
+            place-items: center;
+            padding: 1.5rem;
+            z-index: 100;
+        }
+
+        .modal-backdrop.open {
+            display: grid;
+        }
+
+        .modal-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            max-width: 560px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .close-modal {
+            background: var(--surface-subtle);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            color: var(--text);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Toast de notificación */
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: var(--primary);
+            color: var(--primary-text);
+            padding: 0.75rem 1.2rem;
+            border-radius: 10px;
+            font-size: 0.86rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: all 0.25s ease;
+            z-index: 200;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 860px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+            .photo-wrapper {
+                order: -1;
+                margin: 0 auto;
+            }
+            .link-bar { justify-content: center; }
+            .grid-2, .grid-3, .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra Superior -->
+    <header class="navbar">
+        <div class="navbar-inner">
+            <div class="brand">
+                <div class="brand-monogram">RD</div>
+                <span>Roberto Carlos Delgado Depaz</span>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+                    Modo Oscuro
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Ejecutivo -->
+        <section class="hero-section">
+            <div>
+                <span class="eyebrow">Ingeniería de Sistemas · Universidad Nacional del Santa</span>
+                <h1 class="hero-title">DELGADO DEPAZ ROBERTO CARLOS</h1>
+                <p class="hero-editorial">
+                    Arquitectura de software, desarrollo móvil nativo e infraestructura cloud orientada a producción.
+                </p>
+                <p class="hero-summary">
+                    Estudiante de Ingeniería de Sistemas en la Universidad Nacional del Santa (Nuevo Chimbote, Perú). Enfocado en el diseño de plataformas web multi-tenant, aplicaciones Android con Kotlin y despliegue continuo en entornos de nube.
+                </p>
+
+                <!-- 5 Enlaces Requeridos -->
+                <div class="link-bar">
+                    <a href="mailto:cdelgadodepaz@gmail.com" class="btn-link primary">
+                        Enviar Correo
+                    </a>
+                    <a href="https://www.uns.edu.pe/" target="_blank" rel="noopener" class="btn-link">
+                        Portal UNS ↗
+                    </a>
+                    <a href="https://github.com/Carlos08179" target="_blank" rel="noopener" class="btn-link">
+                        GitHub ↗
+                    </a>
+                    <a href="https://orcid.org/0009-0004-1704-463X" target="_blank" rel="noopener" class="btn-link">
+                        ORCID ↗
+                    </a>
+                    <a href="https://wa.me/51951791780" target="_blank" rel="noopener" class="btn-link">
+                        WhatsApp (951 791 780) ↗
+                    </a>
+                </div>
+            </div>
+
+            <div class="photo-wrapper">
+                <div class="photo-card">
+                    <img src="foto.jpg" alt="Fotografía de Roberto Carlos Delgado Depaz">
+                </div>
+                <div class="photo-caption">Nuevo Chimbote, Áncash</div>
+            </div>
+        </section>
+
+        <!-- Navegación en Pestañas -->
+        <nav class="tabs-header" role="tablist">
+            <button class="tab-trigger active" onclick="switchTab('resumen', this)">
+                Perfil y Experiencia
+            </button>
+            <button class="tab-trigger" onclick="switchTab('estudios', this)">
+                Estudios y Certificaciones <span class="tab-count">4</span>
+            </button>
+            <button class="tab-trigger" onclick="switchTab('proyectos', this)">
+                Proyectos de Ingeniería <span class="tab-count">4</span>
+            </button>
+            <button class="tab-trigger" onclick="switchTab('habilidades', this)">
+                Competencias Técnicas
+            </button>
+        </nav>
+
+        <!-- PESTAÑA 1: PERFIL Y EXPERIENCIA -->
+        <section id="resumen" class="tab-content active">
+            <div class="grid-2">
+                <article class="panel-card">
+                    <span class="section-kicker">Enfoque Profesional</span>
+                    <h3>Ingeniería de Software e Infraestructura</h3>
+                    <p>
+                        Mi formación en la Universidad Nacional del Santa integra el ciclo completo de construcción de sistemas: desde el modelado de bases de datos relacionales y NoSQL hasta la containerización con Docker y despliegue automatizado en Google Cloud Platform y Vercel.
+                    </p>
+                    <p>
+                        Complemento la ingeniería con metodologías ágiles (Scrum) y control de calidad de procesos (Six Sigma), priorizando código mantenible, seguridad operativa y observabilidad.
+                    </p>
+                </article>
+
+                <article class="panel-card">
+                    <span class="section-kicker">Experiencia Institucional</span>
+                    <h3>Trayectoria Operativa y de Campo</h3>
+                    <div class="edu-list">
+                        <div class="edu-item">
+                            <div class="edu-top">
+                                <span class="edu-title">Operador de Centro de Cómputo</span>
+                                <span class="edu-badge">ODPE Santa</span>
+                            </div>
+                            <div class="edu-org">Oficina Nacional de Procesos Electorales · Chimbote</div>
+                            <p style="font-size: 0.88rem;">
+                                Soporte técnico, procesamiento de actas y aseguramiento de la continuidad operativa informática durante procesos electorales.
+                            </p>
+                        </div>
+                        <div class="edu-item">
+                            <div class="edu-top">
+                                <span class="edu-title">Aplicador de Evaluaciones (ENLA)</span>
+                                <span class="edu-badge">INEI</span>
+                            </div>
+                            <div class="edu-org">Instituto Nacional de Estadística e Informática</div>
+                            <p style="font-size: 0.88rem;">
+                                Ejecución y control de calidad en operativos nacionales de evaluación educativa en instituciones de la provincia del Santa.
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 2: ESTUDIOS Y CERTIFICACIONES -->
+        <section id="estudios" class="tab-content">
+            <div class="grid-2">
+                <article class="panel-card">
+                    <span class="section-kicker">Formación Académica</span>
+                    <h3>Educación Universitaria</h3>
+                    <div class="edu-list">
+                        <div class="edu-item">
+                            <div class="edu-top">
+                                <span class="edu-title">Ingeniería de Sistemas</span>
+                                <span class="edu-badge">En curso</span>
+                            </div>
+                            <div class="edu-org">Universidad Nacional del Santa (UNS) — Nuevo Chimbote</div>
+                            <p style="font-size: 0.88rem;">
+                                Formación integral en ingeniería de software, arquitectura de computadoras, redes de datos, sistemas operativos y gestión de proyectos TI.
+                            </p>
+                        </div>
+                        <div class="edu-item">
+                            <div class="edu-top">
+                                <span class="edu-title">Diseño de Infraestructura & Data Center</span>
+                                <span class="edu-badge">ANSI/TIA-942-B</span>
+                            </div>
+                            <div class="edu-org">Especialización Académica · UNS</div>
+                            <p style="font-size: 0.88rem;">
+                                Especificación técnica de centros de datos Rated 2, monitoreo de servidores con Zabbix y administración de entornos Linux virtualizados.
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="panel-card">
+                    <span class="section-kicker">Acreditaciones</span>
+                    <h3>Certificaciones Profesionales</h3>
+                    <div class="edu-list">
+                        <div class="edu-item">
+                            <div class="edu-top">
+                                <span class="edu-title">Scrum Fundamentals Certified (SFC™)</span>
+                                <span class="edu-badge">SCRUMstudy</span>
+                            </div>
+                            <div class="edu-org">Marco de trabajo ágil y entrega iterativa de productos</div>
+                        </div>
+                        <div class="edu-item">
+                            <div class="edu-top">
+                                <span class="edu-title">Six Sigma Yellow Belt</span>
+                                <span class="edu-badge">Certificado</span>
+                            </div>
+                            <div class="edu-org">Optimización de procesos y reducción de variabilidad operativa</div>
+                        </div>
+                        <div class="edu-item">
+                            <div class="edu-top">
+                                <span class="edu-title">Cybersecurity & Ethical Hacking</span>
+                                <span class="edu-badge">Cisco</span>
+                            </div>
+                            <div class="edu-org">Cisco Networking Academy — Insignias digitales verificadas</div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 3: PROYECTOS -->
+        <section id="proyectos" class="tab-content">
+            <div class="grid-3">
+                <article class="panel-card">
+                    <span class="section-kicker">SaaS Multi-Tenant</span>
+                    <h3>ServiceCloud AI</h3>
+                    <p>
+                        Plataforma web de gestión de servicios de TI (ITSM) con aislamiento multi-inquilino, automatización de flujos y despliegue containerizado en servidor VPS.
+                    </p>
+                    <div class="tag-cloud">
+                        <span class="tag-pill">Laravel 13</span>
+                        <span class="tag-pill">PHP 8.4</span>
+                        <span class="tag-pill">PostgreSQL</span>
+                        <span class="tag-pill">Docker</span>
+                    </div>
+                    <div class="project-footer">
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">Arquitectura Web</span>
+                        <button class="detail-btn" onclick="openProject('servicecloud')">Ver arquitectura →</button>
+                    </div>
+                </article>
+
+                <article class="panel-card">
+                    <span class="section-kicker">Android Nativo</span>
+                    <h3>GuardIA</h3>
+                    <p>
+                        Aplicación móvil de seguridad personal con persistencia local offline-first, sincronización en tiempo real en la nube y detección inteligente por sensores.
+                    </p>
+                    <div class="tag-cloud">
+                        <span class="tag-pill">Kotlin</span>
+                        <span class="tag-pill">Jetpack Compose</span>
+                        <span class="tag-pill">Room</span>
+                        <span class="tag-pill">Firebase</span>
+                    </div>
+                    <div class="project-footer">
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">App Móvil</span>
+                        <button class="detail-btn" onclick="openProject('guardia')">Ver arquitectura →</button>
+                    </div>
+                </article>
+
+                <article class="panel-card">
+                    <span class="section-kicker">Geolocalización & Eventos</span>
+                    <h3>Eventify</h3>
+                    <p>
+                        Sistema móvil para creación, descubrimiento y gestión logística de eventos con integración nativa de mapas interactivos y notificaciones en la nube.
+                    </p>
+                    <div class="tag-cloud">
+                        <span class="tag-pill">Android SDK</span>
+                        <span class="tag-pill">Maps SDK</span>
+                        <span class="tag-pill">Firestore</span>
+                    </div>
+                    <div class="project-footer">
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">App Móvil</span>
+                        <button class="detail-btn" onclick="openProject('eventify')">Ver arquitectura →</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- PESTAÑA 4: HABILIDADES -->
+        <section id="habilidades" class="tab-content">
+            <div class="grid-2">
+                <article class="panel-card">
+                    <span class="section-kicker">Desarrollo de Software</span>
+                    <h3>Lenguajes y Frameworks</h3>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>Kotlin & Jetpack Compose (Android)</span><span>Avanzado</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 88%;"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>PHP 8 & Laravel (Backend SaaS)</span><span>Avanzado</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>HTML5, CSS3 & JavaScript Moderno</span><span>Intermedio - Avanzado</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 84%;"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>PostgreSQL, MySQL & Firebase Firestore</span><span>Avanzado</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 86%;"></div></div>
+                    </div>
+                </article>
+
+                <article class="panel-card">
+                    <span class="section-kicker">Cloud, Operaciones & Gestión</span>
+                    <h3>Infraestructura y Metodologías</h3>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>Google Cloud Platform (Compute, App Engine, Ops)</span><span>Intermedio - Avanzado</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 82%;"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>Docker, Docker Compose & Linux Server</span><span>Avanzado</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-meta"><span>Monitoreo con Zabbix & Ciberseguridad</span><span>Intermedio</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 78%;"></div></div>
+                    </div>
+                    <div class="tag-cloud">
+                        <span class="tag-pill">Git & GitHub</span>
+                        <span class="tag-pill">Vercel CI/CD</span>
+                        <span class="tag-pill">Scrum</span>
+                        <span class="tag-pill">Six Sigma</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- BLOQUE INFERIOR PROFESIONAL (Información Institucional y Contacto) -->
+        <section class="bottom-profile">
+            <div class="bottom-grid">
+                <div class="bottom-col">
+                    <h4>Perfil Institucional</h4>
+                    <p>
+                        <strong>DELGADO DEPAZ ROBERTO CARLOS</strong><br>
+                        Estudiante de Ingeniería de Sistemas — Universidad Nacional del Santa (UNS).<br>
+                        Nuevo Chimbote, Áncash, Perú.
+                    </p>
+                </div>
+
+                <div class="bottom-col">
+                    <h4>Contacto Directo</h4>
+                    <ul class="contact-list">
+                        <li>
+                            <span>cdelgadodepaz@gmail.com</span>
+                            <button class="copy-chip" onclick="copyText('cdelgadodepaz@gmail.com', 'Correo copiado')">Copiar</button>
+                        </li>
+                        <li>
+                            <span>+51 951 791 780</span>
+                            <button class="copy-chip" onclick="copyText('951791780', 'Teléfono copiado')">Copiar</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bottom-col">
+                    <h4>Enlaces Académicos y Código</h4>
+                    <ul class="contact-list">
+                        <li><a href="https://www.uns.edu.pe/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">Universidad Nacional del Santa ↗</a></li>
+                        <li><a href="https://github.com/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">Repositorio GitHub ↗</a></li>
+                        <li><a href="https://orcid.org/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">Registro Investigador ORCID ↗</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sub-footer">
+                <span>© 2026 Delgado Depaz Roberto Carlos. Todos los derechos reservados.</span>
+                <span>Desplegado en Vercel · Ingeniería de Sistemas UNS</span>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Detalle Técnico -->
+    <div class="modal-backdrop" id="projectModal" onclick="closeModal(event)">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modalTitle" style="font-size: 1.25rem;">Detalle del Proyecto</h3>
+                <button class="close-modal" onclick="forceCloseModal()">✕</button>
+            </div>
+            <p id="modalBody" style="color: var(--text-secondary); font-size: 0.94rem; margin-bottom: 1.25rem;"></p>
+            <div id="modalTags" class="tag-cloud"></div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">Copiado al portapapeles</div>
+
+    <script>
+        function switchTab(tabId, trigger) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-trigger').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            trigger.classList.add('active');
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const btn = document.getElementById('themeBtn');
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            btn.textContent = isDark ? 'Modo Oscuro' : 'Modo Claro';
+        }
+
+        function copyText(text, label) {
+            navigator.clipboard.writeText(text);
+            const toast = document.getElementById('toast');
+            toast.textContent = label + ': ' + text;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2400);
+        }
+
+        const projectDetails = {
+            servicecloud: {
+                title: 'ServiceCloud AI — Arquitectura Multi-Tenant',
+                body: 'Sistema integral de Mesa de Ayuda y Gestión de Servicios de TI (ITSM). Implementa separación lógica por inquilinos (tenants), gestión de roles, seguimiento de SLAs y despliegue reproducido mediante contenedores Docker Compose sobre servidor Linux con PostgreSQL 17.',
+                tags: ['PHP 8.4', 'Laravel 13', 'PostgreSQL 17', 'Docker Compose', 'Linux VPS']
+            },
+            guardia: {
+                title: 'GuardIA — Seguridad Personal en Android',
+                body: 'Aplicación desarrollada bajo arquitectura limpia en Kotlin y Jetpack Compose. Combina base de datos local Room para operación sin conexión con sincronización en tiempo real en Cloud Firestore, lectura de sensores de movimiento y despacho automatizado de alertas SMS.',
+                tags: ['Kotlin', 'Jetpack Compose', 'Room Database', 'Firebase Firestore', 'API 24+']
+            },
+            eventify: {
+                title: 'Eventify — Gestión y Geolocalización de Eventos',
+                body: 'Aplicación móvil centrada en la organización y descubrimiento de eventos locales. Integra Google Maps SDK para trazado de ubicaciones, autenticación de usuarios y almacenamiento en la nube con Firebase.',
+                tags: ['Kotlin', 'Android Studio', 'Google Maps SDK', 'Firebase Auth', 'Cloud Firestore']
+            }
+        };
+
+        function openProject(key) {
+            const data = projectDetails[key];
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalBody').textContent = data.body;
+            const tagsContainer = document.getElementById('modalTags');
+            tagsContainer.innerHTML = data.tags.map(t => `<span class="tag-pill">${t}</span>`).join('');
+            document.getElementById('projectModal').classList.add('open');
+        }
+
+        function closeModal(e) {
+            if (e.target.id === 'projectModal') forceCloseModal();
+        }
+
+        function forceCloseModal() {
+            document.getElementById('projectModal').classList.remove('open');
+        }
+    </script>
+</body>
+</html>
