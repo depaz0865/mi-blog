@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roberto Carlos Delgado — Blog Personal, Código & Rutas</title>
+    <meta name="description" content="Espacio personal de Roberto Carlos Delgado Depaz. Ingeniería de Sistemas en Nuevo Chimbote, música, viajes, cine, videojuegos y desarrollo de software.">
+    <meta name="author" content="Roberto Carlos Delgado Depaz">
+    <meta name="theme-color" content="#FAF8F5">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Roberto Carlos Delgado — Blog Personal, Código & Rutas">
+    <meta property="og:description" content="Entre líneas de código, música, viajes, películas y proyectos de ingeniería.">
+    <meta property="og:image" content="foto.jpg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23C25934'/%3E%3Ctext x='32' y='42' font-family='Georgia, serif' font-style='italic' font-weight='700' font-size='28' text-anchor='middle' fill='%23FAF8F5'%3ERD%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        (function () {
+            var theme = null;
+            try { theme = localStorage.getItem('theme'); } catch (e) {}
+            if (!theme) theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+
+    <style>
+        :root {
+            --bg: #FAF8F5;
+            --surface: #F2EFE9;
+            --surface-card: #FFFFFF;
+            --text: #1C1B19;
+            --text-secondary: #4A4742;
+            --text-muted: #78736A;
+            --border: rgba(28, 27, 25, 0.11);
+            --border-strong: rgba(28, 27, 25, 0.22);
+            --accent: #C25934;
+            --accent-soft: rgba(194, 89, 52, 0.09);
+            --sage: #3D6B5E;
+            --sage-soft: rgba(61, 107, 94, 0.1);
+            --nav-bg: rgba(250, 248, 245, 0.88);
+            --font-serif: 'Newsreader', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --radius: 18px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #131210;
+            --surface: #1B1A17;
+            --surface-card: #211F1C;
+            --text: #F3EFEA;
+            --text-secondary: #BDB7AE;
+            --text-muted: #888278;
+            --border: rgba(243, 239, 234, 0.1);
+            --border-strong: rgba(243, 239, 234, 0.22);
+            --accent: #E27A53;
+            --accent-soft: rgba(226, 122, 83, 0.14);
+            --sage: #6CA896;
+            --sage-soft: rgba(108, 168, 150, 0.14);
+            --nav-bg: rgba(19, 18, 16, 0.88);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.72;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color .3s ease, color .3s ease;
+        }
+
+        a { color: inherit; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+        .skip-link {
+            position: absolute; left: 1rem; top: -4rem; z-index: 300;
+            background: var(--accent); color: #fff;
+            padding: .6rem 1rem; border-radius: 8px; font-size: .85rem; text-decoration: none;
+        }
+        .skip-link:focus { top: 1rem; }
+
+        /* ---------- Progreso ---------- */
+        .progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 120; pointer-events: none; }
+        .progress i { display: block; height: 100%; width: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; }
+
+        /* ---------- Navbar ---------- */
+        .navbar {
+            position: sticky; top: 0; z-index: 50;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .navbar-inner {
+            max-width: 1120px; margin: 0 auto; padding: .85rem 1.75rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+        }
+        .brand {
+            display: flex; align-items: center; gap: .65rem; text-decoration: none;
+            font-family: var(--font-serif); font-size: 1.25rem; font-weight: 500; letter-spacing: -.01em;
+        }
+        .brand-dot {
+            width: 10px; height: 10px; border-radius: 50%; background: var(--accent); display: inline-block;
+        }
+        .nav-links { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; font-size: .88rem; font-weight: 500;
+            color: var(--text-muted); transition: color .2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .nav-actions { display: flex; align-items: center; gap: .5rem; }
+        .icon-btn {
+            background: transparent; border: 1px solid var(--border); color: var(--text);
+            height: 36px; padding: 0 .7rem; border-radius: 999px; cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+            font-family: var(--font-mono); font-size: .74rem; transition: all .2s;
+        }
+        .icon-btn:hover { border-color: var(--accent); background: var(--surface); }
+        .icon-btn svg { width: 15px; height: 15px; }
+        .icon-moon { display: none; }
+        [data-theme="dark"] .icon-sun { display: none; }
+        [data-theme="dark"] .icon-moon { display: block; }
+        .menu-btn { display: none; width: 36px; padding: 0; }
+
+        /* ---------- Contenedor ---------- */
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 1.75rem; }
+        section.blog-section { padding: 5.5rem 0; border-top: 1px solid var(--border); }
+
+        .section-eyebrow {
+            font-family: var(--font-mono); font-size: .76rem; color: var(--accent);
+            text-transform: uppercase; letter-spacing: .08em; display: block; margin-bottom: .65rem;
+        }
+        .section-heading {
+            font-family: var(--font-serif); font-size: clamp(2rem, 3.8vw, 2.85rem);
+            font-weight: 500; letter-spacing: -.025em; line-height: 1.15; margin-bottom: 1rem;
+        }
+        .section-intro {
+            font-size: 1.06rem; color: var(--text-secondary); max-width: 640px; margin-bottom: 3rem;
+        }
+
+        /* ---------- HERO BLOG PERSONAL ---------- */
+        .hero { padding: 4.5rem 0 5.5rem; }
+        .hero-layout {
+            display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 4rem; align-items: center;
+        }
+        .hero-greeting {
+            display: inline-flex; align-items: center; gap: .55rem;
+            font-family: var(--font-mono); font-size: .78rem; color: var(--text-muted);
+            background: var(--surface); padding: .38rem .85rem; border-radius: 999px;
+            border: 1px solid var(--border); margin-bottom: 1.5rem;
+        }
+        .hero-greeting span.pulse {
+            width: 8px; height: 8px; border-radius: 50%; background: var(--sage);
+        }
+        .hero-title {
+            font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 500; letter-spacing: -.03em; line-height: 1.08; margin-bottom: 1.35rem;
+        }
+        .hero-title em { font-style: italic; color: var(--accent); }
+        .hero-story {
+            font-size: 1.08rem; color: var(--text-secondary); max-width: 580px; margin-bottom: 2rem;
+        }
+
+        .hero-cta-row { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+        .btn {
+            display: inline-flex; align-items: center; gap: .5rem; text-decoration: none;
+            font-size: .88rem; font-weight: 500; padding: .72rem 1.3rem; border-radius: 999px;
+            border: 1px solid var(--border-strong); background: var(--surface-card); color: var(--text);
+            cursor: pointer; font-family: inherit; transition: all .2s ease;
+        }
+        .btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+        .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .btn.primary:hover { opacity: .92; }
+        .btn svg { width: 15px; height: 15px; }
+
+        .social-pills {
+            display: flex; flex-wrap: wrap; gap: 1.15rem; margin-top: 1.75rem;
+            font-size: .86rem; color: var(--text-muted);
+        }
+        .social-pills a {
+            text-decoration: none; border-bottom: 1px solid var(--border-strong);
+            padding-bottom: 2px; transition: color .2s, border-color .2s;
+        }
+        .social-pills a:hover { color: var(--accent); border-color: var(--accent); }
+
+        /* Polaroid / Retrato cálido */
+        .polaroid {
+            background: var(--surface-card); padding: 1rem 1rem 1.35rem;
+            border: 1px solid var(--border); border-radius: 16px;
+            box-shadow: 0 20px 40px -20px rgba(28, 27, 25, 0.16);
+            transform: rotate(1.5deg); transition: transform .4s ease;
+            max-width: 310px; justify-self: center; width: 100%;
+        }
+        .polaroid:hover { transform: rotate(0deg); }
+        .polaroid-img {
+            aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden;
+            background: var(--surface); position: relative;
+        }
+        .polaroid-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .polaroid-fallback {
+            display: none; position: absolute; inset: 0; place-items: center;
+            font-family: var(--font-serif); font-style: italic; font-size: 3.5rem; color: var(--text-muted);
+        }
+        .polaroid-img.no-img .polaroid-fallback { display: grid; }
+        .polaroid-img.no-img img { display: none; }
+        .polaroid-note {
+            margin-top: .95rem; font-family: var(--font-serif); font-style: italic;
+            font-size: .98rem; color: var(--text-secondary); text-align: center;
+        }
+
+        /* ---------- SOBRE MÍ (HISTORIA PERSONAL) ---------- */
+        .about-essay {
+            display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 4rem; align-items: start;
+        }
+        .essay-body p {
+            font-size: 1.06rem; color: var(--text-secondary); margin-bottom: 1.35rem;
+        }
+        .essay-body p:first-of-type::first-letter {
+            font-family: var(--font-serif); font-size: 3.2rem; float: left;
+            line-height: .88; padding-right: .6rem; padding-top: .15rem; color: var(--accent);
+        }
+        .aside-notes {
+            background: var(--surface); border-radius: var(--radius); padding: 1.75rem;
+            border: 1px solid var(--border);
+        }
+        .aside-notes h3 {
+            font-family: var(--font-serif); font-size: 1.25rem; font-weight: 500; margin-bottom: 1rem;
+        }
+        .note-list { list-style: none; display: flex; flex-direction: column; gap: .95rem; }
+        .note-list li {
+            font-size: .9rem; color: var(--text-secondary); padding-bottom: .95rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .note-list li:last-child { border-bottom: none; padding-bottom: 0; }
+        .note-list strong { display: block; color: var(--text); font-weight: 600; font-size: .85rem; }
+
+        /* ---------- BITÁCORA: HOBBIES & TIEMPO LIBRE ---------- */
+        .journal-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem;
+        }
+        .journal-card {
+            background: var(--surface-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 2rem;
+            display: flex; flex-direction: column; justify-content: space-between;
+            transition: border-color .25s, transform .25s;
+        }
+        .journal-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .journal-tag {
+            display: inline-block; font-family: var(--font-mono); font-size: .72rem;
+            color: var(--sage); background: var(--sage-soft); padding: .25rem .65rem;
+            border-radius: 999px; margin-bottom: 1rem; align-self: flex-start;
+        }
+        .journal-tag.warm { color: var(--accent); background: var(--accent-soft); }
+        .journal-card h3 {
+            font-family: var(--font-serif); font-size: 1.45rem; font-weight: 500;
+            line-height: 1.25; margin-bottom: .75rem;
+        }
+        .journal-card p { font-size: .95rem; color: var(--text-secondary); }
+        .journal-quote {
+            margin-top: 1.25rem; padding-top: 1rem; border-top: 1px dashed var(--border-strong);
+            font-family: var(--font-serif); font-style: italic; font-size: .95rem; color: var(--text-muted);
+        }
+
+        /* ---------- PROYECTOS COMO CRÓNICAS ---------- */
+        .featured-build {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 22px;
+            padding: 2.75rem; margin-bottom: 2.5rem;
+            display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center;
+        }
+        .build-label {
+            font-family: var(--font-mono); font-size: .74rem; color: var(--accent);
+            text-transform: uppercase; letter-spacing: .06em; display: block; margin-bottom: .5rem;
+        }
+        .build-title {
+            font-family: var(--font-serif); font-size: clamp(1.7rem, 3vw, 2.3rem);
+            font-weight: 500; line-height: 1.15; margin-bottom: .85rem;
+        }
+        .build-desc { color: var(--text-secondary); font-size: .98rem; margin-bottom: 1.25rem; }
+        .build-points { list-style: none; display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1.5rem; }
+        .build-points li {
+            position: relative; padding-left: 1.25rem; font-size: .9rem; color: var(--text-secondary);
+        }
+        .build-points li::before { content: "•"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+        .chips { display: flex; flex-wrap: wrap; gap: .45rem; }
+        .chip {
+            font-family: var(--font-mono); font-size: .73rem; padding: .28rem .65rem;
+            border-radius: 999px; background: var(--surface-card); border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .sketch-box {
+            background: var(--surface-card); border: 1px solid var(--border);
+            border-radius: 14px; padding: 1.1rem;
+        }
+        .sketch-head {
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: var(--font-mono); font-size: .7rem; color: var(--text-muted);
+            padding-bottom: .75rem; margin-bottom: .85rem; border-bottom: 1px solid var(--border);
+        }
+        .sketch-svg { width: 100%; height: auto; display: block; }
+
+        .secondary-builds { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .build-card {
+            background: var(--surface-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .build-card .sketch-box { margin-bottom: 1.5rem; background: var(--bg); }
+        .build-card .build-title { font-size: 1.5rem; }
+
+        /* Acordeón arquitectura */
+        .arch-toggle {
+            margin-top: 1.2rem; background: none; border: none; color: var(--accent);
+            font-family: var(--font-mono); font-size: .78rem; cursor: pointer;
+            display: inline-flex; align-items: center; gap: .4rem; align-self: flex-start;
+        }
+        .arch-toggle:hover { text-decoration: underline; }
+        .arch-toggle svg { width: 14px; height: 14px; transition: transform .25s; }
+        .arch-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+        .arch {
+            margin-top: .9rem; border: 1px dashed var(--border-strong); border-radius: 12px;
+            padding: .95rem; background: var(--bg);
+        }
+        .arch[hidden] { display: none; }
+        .arch-flow { display: flex; flex-direction: column; gap: .35rem; }
+        .arch-node {
+            background: var(--surface-card); border: 1px solid var(--border); border-radius: 8px;
+            padding: .5rem .75rem; display: flex; justify-content: space-between; gap: .5rem; align-items: baseline;
+        }
+        .arch-node b { font-size: .85rem; font-weight: 600; }
+        .arch-node small { font-family: var(--font-mono); font-size: .72rem; color: var(--text-muted); text-align: right; }
+        .arch-arrow { text-align: center; color: var(--accent); font-size: .8rem; }
+        .arch-note { margin-top: .65rem; font-size: .74rem; color: var(--text-muted); text-align: center; }
+
+        /* ---------- CAMINO & EXPERIENCIA ---------- */
+        .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; }
+        .path-col-title {
+            font-family: var(--font-serif); font-size: 1.45rem; font-weight: 500;
+            padding-bottom: .85rem; border-bottom: 1px solid var(--border); margin-bottom: 1.75rem;
+        }
+        .path-item {
+            position: relative; padding-left: 1.35rem; padding-bottom: 1.75rem;
+            border-left: 1.5px solid var(--border-strong);
+        }
+        .path-item:last-child { padding-bottom: 0; }
+        .path-item::before {
+            content: ""; position: absolute; left: -5.5px; top: .45rem;
+            width: 9px; height: 9px; border-radius: 50%; background: var(--accent);
+        }
+        .path-meta {
+            font-family: var(--font-mono); font-size: .74rem; color: var(--accent); margin-bottom: .25rem;
+        }
+        .path-item h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: .3rem; }
+        .path-item p { font-size: .92rem; color: var(--text-secondary); }
+
+        .cert-strip {
+            margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+            display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;
+        }
+        .cert-strip-label { font-family: var(--font-serif); font-style: italic; font-size: 1.1rem; color: var(--text-secondary); }
+        .cert-badges { display: flex; flex-wrap: wrap; gap: .6rem; }
+        .cert-pill {
+            font-size: .82rem; padding: .42rem .9rem; border-radius: 999px;
+            background: var(--surface); border: 1px solid var(--border); color: var(--text);
+        }
+
+        /* ---------- HERRAMIENTAS ---------- */
+        .tools-wrap { display: flex; flex-wrap: wrap; gap: .65rem; }
+        .tool-tag {
+            font-family: var(--font-mono); font-size: .8rem; padding: .5rem .95rem;
+            border-radius: 10px; background: var(--surface-card); border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        /* ---------- CONTACTO CERCANO ---------- */
+        .outro-card {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
+            padding: 3.5rem; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 3rem; align-items: center;
+        }
+        .outro-card h2 {
+            font-family: var(--font-serif); font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+            font-weight: 500; line-height: 1.15; margin-bottom: .9rem;
+        }
+        .outro-card p { color: var(--text-secondary); font-size: 1.02rem; }
+        .contact-links { display: flex; flex-direction: column; gap: .75rem; }
+        .contact-item {
+            display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+            background: var(--surface-card); border: 1px solid var(--border);
+            padding: .85rem 1.1rem; border-radius: 12px; font-size: .92rem;
+        }
+        .contact-item a { text-decoration: none; font-weight: 500; word-break: break-all; }
+        .contact-item a:hover { color: var(--accent); }
+        .copy-chip {
+            font-family: var(--font-mono); font-size: .72rem; background: var(--surface);
+            border: 1px solid var(--border); color: var(--text); padding: .3rem .65rem;
+            border-radius: 6px; cursor: pointer; flex: none;
+        }
+        .copy-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+        footer { border-top: 1px solid var(--border); margin-top: 4rem; }
+        .footer-inner {
+            max-width: 1120px; margin: 0 auto; padding: 2rem 1.75rem;
+            display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+            font-size: .84rem; color: var(--text-muted);
+        }
+        .footer-links { display: flex; gap: 1.25rem; }
+        .footer-links a { text-decoration: none; }
+        .footer-links a:hover { color: var(--accent); }
+
+        /* Paleta de comandos & Toast */
+        .kbd { font-family: var(--font-mono); font-size: .68rem; border: 1px solid var(--border-strong); border-radius: 4px; padding: .05rem .35rem; color: var(--text-muted); }
+        .palette { position: fixed; inset: 0; z-index: 250; display: none; background: rgba(19, 18, 16, .55); backdrop-filter: blur(4px); padding: 12vh 1rem 1rem; justify-content: center; align-items: flex-start; }
+        .palette.open { display: flex; }
+        .palette-box { width: 100%; max-width: 540px; background: var(--surface-card); border: 1px solid var(--border-strong); border-radius: 16px; overflow: hidden; }
+        .palette-input { width: 100%; border: none; border-bottom: 1px solid var(--border); background: transparent; color: var(--text); font: inherit; font-size: .98rem; padding: 1rem 1.2rem; outline: none; }
+        .palette-list { list-style: none; max-height: 300px; overflow-y: auto; padding: .4rem; }
+        .palette-list li { display: flex; justify-content: space-between; align-items: center; padding: .65rem .85rem; border-radius: 8px; font-size: .9rem; cursor: pointer; }
+        .palette-list li small { font-family: var(--font-mono); color: var(--text-muted); font-size: .72rem; }
+        .palette-list li.active { background: var(--accent-soft); color: var(--accent); }
+        .palette-empty { padding: 1.2rem; text-align: center; color: var(--text-muted); font-size: .88rem; }
+        .palette-foot { border-top: 1px solid var(--border); padding: .55rem 1rem; font-family: var(--font-mono); font-size: .7rem; color: var(--text-muted); display: flex; gap: 1rem; }
+
+        .toast { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200; background: var(--text); color: var(--bg); padding: .7rem 1.1rem; border-radius: 999px; font-size: .84rem; opacity: 0; transform: translateY(10px); pointer-events: none; transition: all .25s ease; }
+        .toast.show { opacity: 1; transform: translateY(0); }
+
+        .to-top { position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 90; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-strong); background: var(--surface-card); color: var(--text); cursor: pointer; display: grid; place-items: center; opacity: 0; transform: translateY(10px); pointer-events: none; transition: all .25s; }
+        .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+        .to-top:hover { border-color: var(--accent); color: var(--accent); }
+        .to-top svg { width: 16px; height: 16px; }
+
+        .reveal { opacity: 0; transform: translateY(14px); transition: opacity .65s ease, transform .65s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { transition: none !important; animation: none !important; }
+            .reveal { opacity: 1; transform: none; }
+        }
+
+        @media (max-width: 900px) {
+            .hero-layout, .about-essay, .featured-build, .outro-card { grid-template-columns: 1fr; gap: 2.5rem; }
+            .polaroid { order: -1; max-width: 260px; }
+            .journal-grid, .secondary-builds, .path-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 760px) {
+            .menu-btn { display: inline-flex; }
+            .nav-links {
+                position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
+                background: var(--bg); border-bottom: 1px solid var(--border); padding: .5rem 1.75rem 1rem; display: none;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: .7rem 0; border-bottom: 1px solid var(--border); }
+            .nav-links li:last-child a { border-bottom: none; }
+            .search-lbl, .kbd { display: none; }
+            .outro-card, .featured-build { padding: 2rem 1.5rem; }
+        }
+
+        @media print {
+            .navbar, .toast, .nav-actions, .skip-link, .copy-chip, .progress, .palette, .to-top, .arch-toggle, .arch, .btn[data-action] { display: none !important; }
+            body { background: #fff; color: #000; }
+            .reveal { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+    <header class="navbar">
+        <div class="navbar-inner">
+            <a href="#inicio" class="brand" aria-label="Ir al inicio">
+                <span class="brand-dot"></span>
+                <span>Carlos Delgado</span>
+            </a>
+
+            <nav aria-label="Navegación">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#sobre-mi">Sobre mí</a></li>
+                    <li><a href="#bitacora">Hobbies &amp; Rutas</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#camino">Camino</a></li>
+                    <li><a href="#contacto">Charlemos</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="paletteBtn" type="button" aria-label="Buscador rápido">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                    <span class="search-lbl">Explorar</span><span class="kbd">Ctrl K</span>
+                </button>
+                <button class="icon-btn" id="themeBtn" type="button" aria-label="Cambiar modo de lectura">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                </button>
+                <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="contenido">
+        <!-- HERO PERSONAL -->
+        <section class="hero" id="inicio">
+            <div class="container">
+                <div class="hero-layout">
+                    <div>
+                        <div class="hero-greeting">
+                            <span class="pulse"></span>
+                            <span>Nuevo Chimbote, Áncash · Blog personal</span>
+                        </div>
+                        <h1 class="hero-title">
+                            Hola, soy Carlos.<br>
+                            Entre <em>código</em>, viajes, música y buenas historias.
+                        </h1>
+                        <p class="hero-story">
+                            Estudio Ingeniería de Sistemas en la Universidad Nacional del Santa. Este es mi espacio personal en internet: un lugar para compartir los proyectos de software que voy armando, pero también lo que disfruto fuera de la pantalla, como salir a pasear, viajar, tocar instrumentos, ver películas o pasar el rato con videojuegos.
+                        </p>
+
+                        <div class="hero-cta-row">
+                            <a href="#bitacora" class="btn primary">Conocer mis hobbies</a>
+                            <a href="mailto:cdelgadodepaz@gmail.com" class="btn">Escríbeme un correo</a>
+                            <button type="button" class="btn" data-action="print">Versión imprimible</button>
+                        </div>
+
+                        <div class="social-pills">
+                            <a href="https://github.com/Carlos08179" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            <a href="https://wa.me/51951791780" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                            <a href="https://orcid.org/0009-0004-1704-463X" target="_blank" rel="noopener noreferrer">ORCID</a>
+                            <a href="https://www.uns.edu.pe/" target="_blank" rel="noopener noreferrer">UNS</a>
+                        </div>
+                    </div>
+
+                    <figure class="polaroid">
+                        <div class="polaroid-img" id="photoCard">
+                            <img src="foto.jpg" alt="Roberto Carlos Delgado Depaz" width="310" height="388" decoding="async">
+                            <div class="polaroid-fallback" aria-hidden="true">CD</div>
+                        </div>
+                        <figcaption class="polaroid-note">Carlos · Nuevo Chimbote</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOBRE MÍ -->
+        <section class="blog-section" id="sobre-mi">
+            <div class="container">
+                <span class="section-eyebrow">Sobre mí</span>
+                <h2 class="section-heading">Un poco más allá del teclado</h2>
+
+                <div class="about-essay">
+                    <div class="essay-body reveal">
+                        <p>
+                            Soy de las personas que disfrutan tanto armar una aplicación desde cero como desconectarse por completo saliendo a caminar o planificando una escapada de fin de semana. Estudiar Ingeniería de Sistemas en la Universidad Nacional del Santa me enseñó a resolver problemas paso a paso, pero creo que las mejores ideas siempre aparecen cuando sales de la rutina.
+                        </p>
+                        <p>
+                            En mi día a día alterno entre programar plataformas web y aplicaciones Android, y dedicarle tiempo a las cosas simples que me gustan: agarrar un instrumento para sacar alguna melodía, poner una buena película o serie por la noche, o echar una partida en algún videojuego para despejar la mente.
+                        </p>
+                        <p>
+                            También he tenido la suerte de trabajar en campo recorriendo distintos puntos de la provincia del Santa, algo que me permitió conocer lugares nuevos, conversar con mucha gente y entender que la tecnología siempre debe estar al servicio de lo cotidiano.
+                        </p>
+                    </div>
+
+                    <aside class="aside-notes reveal">
+                        <h3>En resumen, hoy estoy en…</h3>
+                        <ul class="note-list">
+                            <li>
+                                <strong>La universidad</strong>
+                                Cursando Ingeniería de Sistemas en la UNS (Nuevo Chimbote).
+                            </li>
+                            <li>
+                                <strong>Tiempo libre</strong>
+                                Saliendo a pasear, viajando cuando se da la oportunidad y descubriendo lugares nuevos.
+                            </li>
+                            <li>
+                                <strong>Música &amp; Ocio</strong>
+                                Tocando instrumentos, viendo series o películas y jugando videojuegos.
+                            </li>
+                            <li>
+                                <strong>Proyectos</strong>
+                                Desarrollando apps móviles en Kotlin y plataformas web con Laravel y Docker.
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- BITÁCORA: HOBBIES & TIEMPO LIBRE -->
+        <section class="blog-section" id="bitacora">
+            <div class="container">
+                <span class="section-eyebrow">Tiempo libre</span>
+                <h2 class="section-heading">Lo que disfruto hacer fuera del trabajo</h2>
+                <p class="section-intro">
+                    Un vistazo a mis pasatiempos favoritos y a las actividades que me ayudan a recargar energías.
+                </p>
+
+                <div class="journal-grid">
+                    <article class="journal-card reveal">
+                        <div>
+                            <span class="journal-tag warm">Viajes &amp; Paseos</span>
+                            <h3>Salir a caminar, viajar y conocer nuevos lugares</h3>
+                            <p>
+                                Me encanta salir a pasear sin prisa, despejar la mente al aire libre y aprovechar cualquier oportunidad para viajar y conocer rutas o paisajes distintos. Ya sea una salida tranquila por la ciudad o un viaje corto por la región, cambiar de ambiente siempre me renueva.
+                            </p>
+                        </div>
+                        <div class="journal-quote">
+                            “No hace falta ir muy lejos para disfrutar del camino; basta con salir con buena compañía o ganas de explorar.”
+                        </div>
+                    </article>
+
+                    <article class="journal-card reveal">
+                        <div>
+                            <span class="journal-tag">Música</span>
+                            <h3>Tocar instrumentos y escuchar buena música</h3>
+                            <p>
+                                La música es parte indispensable de mi rutina. Me gusta dedicar ratos libres a tocar instrumentos, practicar acordes y probar melodías nuevas mientras escucho de todo un poco para relajarme después de un día largo de estudio o código.
+                            </p>
+                        </div>
+                        <div class="journal-quote">
+                            Tocar un rato al final del día es la mejor forma de bajar el ritmo y desconectar del monitor.
+                        </div>
+                    </article>
+
+                    <article class="journal-card reveal">
+                        <div>
+                            <span class="journal-tag">Cine &amp; Series</span>
+                            <h3>Maratones de películas y series</h3>
+                            <p>
+                                Disfruto mucho sentarme a ver una buena película o engancharme con una serie interesante. Desde historias de suspenso y ciencia ficción hasta comedias ligeras para pasar el rato, siempre tengo alguna recomendación pendiente en mi lista.
+                            </p>
+                        </div>
+                        <div class="journal-quote">
+                            Una buena historia en pantalla siempre es el plan perfecto para cerrar la semana.
+                        </div>
+                    </article>
+
+                    <article class="journal-card reveal">
+                        <div>
+                            <span class="journal-tag warm">Gaming &amp; Curiosidad</span>
+                            <h3>Videojuegos y proyectos personales</h3>
+                            <p>
+                                Los videojuegos son otro de mis pasatiempos habituales, tanto para divertirme un rato como para apreciar cómo están diseñados sus mundos y mecánicas. También disfruto experimentar con pequeños proyectos de electrónica, retoque de fotos y tecnología por pura curiosidad.
+                            </p>
+                        </div>
+                        <div class="journal-quote">
+                            Jugar y experimentar con cosas nuevas mantiene viva la curiosidad de seguir aprendiendo.
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROYECTOS DE SOFTWARE -->
+        <section class="blog-section" id="proyectos">
+            <div class="container">
+                <span class="section-eyebrow">Proyectos</span>
+                <h2 class="section-heading">Cosas que he diseñado y programado</h2>
+                <p class="section-intro">
+                    Algunos de los sistemas web y aplicaciones móviles en los que he trabajado durante mi carrera.
+                </p>
+
+                <!-- PROYECTO PRINCIPAL -->
+                <article class="featured-build reveal">
+                    <div>
+                        <span class="build-label">Proyecto Principal · Plataforma Web SaaS</span>
+                        <h3 class="build-title" data-arch="servicecloud">ServiceCloud AI</h3>
+                        <p class="build-desc">
+                            Una plataforma web de mesa de ayuda y gestión de servicios de TI (ITSM) diseñada para que distintas organizaciones puedan operar de forma independiente, con sus propios roles, tickets y seguimiento de tiempos de atención (SLAs), desplegada mediante contenedores en un servidor VPS.
+                        </p>
+                        <ul class="build-points">
+                            <li>Separación lógica por organizaciones (multi-tenant) y control de roles</li>
+                            <li>Seguimiento de SLAs y automatización de flujos de soporte</li>
+                            <li>Despliegue reproducible con Docker Compose sobre Linux</li>
+                        </ul>
+                        <div class="chips">
+                            <span class="chip">PHP 8.4</span>
+                            <span class="chip">Laravel 13</span>
+                            <span class="chip">PostgreSQL 17</span>
+                            <span class="chip">Docker Compose</span>
+                        </div>
+                    </div>
+
+                    <div class="sketch-box" aria-hidden="true">
+                        <div class="sketch-head">
+                            <span>esquema // servicecloud-ai</span>
+                            <span>multi-tenant</span>
+                        </div>
+                        <svg class="sketch-svg" viewBox="0 0 420 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1" y="1" width="418" height="218" rx="8" stroke="currentColor" stroke-opacity="0.14"/>
+                            <rect x="16" y="16" width="86" height="188" rx="6" fill="currentColor" fill-opacity="0.04"/>
+                            <rect x="28" y="30" width="46" height="8" rx="4" fill="var(--accent)"/>
+                            <rect x="28" y="52" width="58" height="5" rx="2.5" fill="currentColor" fill-opacity="0.22"/>
+                            <rect x="28" y="66" width="48" height="5" rx="2.5" fill="currentColor" fill-opacity="0.14"/>
+                            <rect x="28" y="80" width="54" height="5" rx="2.5" fill="currentColor" fill-opacity="0.14"/>
+
+                            <rect x="116" y="16" width="288" height="44" rx="6" fill="currentColor" fill-opacity="0.03" stroke="currentColor" stroke-opacity="0.1"/>
+                            <text x="128" y="35" font-family="monospace" font-size="9" fill="currentColor" fill-opacity="0.7">ESPACIO: INQUILINO #042 · MESA DE AYUDA</text>
+                            <rect x="128" y="43" width="120" height="4" rx="2" fill="var(--accent)" fill-opacity="0.75"/>
+
+                            <rect x="116" y="72" width="138" height="60" rx="6" fill="currentColor" fill-opacity="0.03" stroke="currentColor" stroke-opacity="0.1"/>
+                            <text x="126" y="90" font-family="monospace" font-size="8" fill="var(--accent)">TICKET #104 · URGENTE</text>
+                            <rect x="126" y="100" width="102" height="5" rx="2.5" fill="currentColor" fill-opacity="0.25"/>
+                            <rect x="126" y="112" width="76" height="5" rx="2.5" fill="currentColor" fill-opacity="0.14"/>
+
+                            <rect x="266" y="72" width="138" height="60" rx="6" fill="currentColor" fill-opacity="0.03" stroke="currentColor" stroke-opacity="0.1"/>
+                            <text x="276" y="90" font-family="monospace" font-size="8" fill="var(--sage)">TICKET #105 · RESUELTO</text>
+                            <rect x="276" y="100" width="108" height="5" rx="2.5" fill="currentColor" fill-opacity="0.25"/>
+                            <rect x="276" y="112" width="80" height="5" rx="2.5" fill="currentColor" fill-opacity="0.14"/>
+
+                            <rect x="116" y="144" width="288" height="60" rx="6" fill="currentColor" fill-opacity="0.03" stroke="currentColor" stroke-opacity="0.1"/>
+                            <text x="128" y="164" font-family="monospace" font-size="8.5" fill="currentColor" fill-opacity="0.65">CONTENEDORES DOCKER · POSTGRESQL 17</text>
+                            <rect x="128" y="176" width="82" height="16" rx="4" stroke="var(--accent)"/>
+                            <text x="142" y="187" font-family="monospace" font-size="7.5" fill="var(--accent)">APP WEB</text>
+                            <rect x="220" y="176" width="82" height="16" rx="4" stroke="currentColor" stroke-opacity="0.3"/>
+                            <text x="233" y="187" font-family="monospace" font-size="7.5" fill="currentColor" fill-opacity="0.7">BASE DATOS</text>
+                            <rect x="312" y="176" width="80" height="16" rx="4" stroke="var(--sage)"/>
+                            <text x="327" y="187" font-family="monospace" font-size="7.5" fill="var(--sage)">COLAS OK</text>
+                        </svg>
+                    </div>
+                </article>
+
+                <!-- PROYECTOS MÓVILES -->
+                <div class="secondary-builds">
+                    <article class="build-card reveal">
+                        <div>
+                            <div class="sketch-box" aria-hidden="true">
+                                <div class="sketch-head">
+                                    <span>guardia.kt</span>
+                                    <span>offline-first</span>
+                                </div>
+                                <svg class="sketch-svg" viewBox="0 0 380 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="10" y="14" width="104" height="112" rx="8" stroke="currentColor" stroke-opacity="0.2"/>
+                                    <text x="22" y="32" font-family="monospace" font-size="7.5" fill="var(--accent)">SENSORES</text>
+                                    <path d="M22 72 Q38 42 54 72 T86 72 T104 58" stroke="var(--accent)" stroke-width="1.6" fill="none"/>
+                                    <text x="22" y="112" font-family="monospace" font-size="7" fill="currentColor" fill-opacity="0.6">MOVIMIENTO</text>
+
+                                    <path d="M122 70 H148" stroke="var(--accent)" stroke-width="1.3" stroke-dasharray="3 3"/>
+
+                                    <rect x="156" y="14" width="96" height="112" rx="8" stroke="currentColor" stroke-opacity="0.2"/>
+                                    <text x="168" y="32" font-family="monospace" font-size="7.5" fill="currentColor" fill-opacity="0.7">ROOM LOCAL</text>
+                                    <rect x="168" y="46" width="72" height="11" rx="3" fill="currentColor" fill-opacity="0.07"/>
+                                    <rect x="168" y="63" width="72" height="11" rx="3" fill="currentColor" fill-opacity="0.07"/>
+                                    <text x="168" y="112" font-family="monospace" font-size="7" fill="currentColor" fill-opacity="0.6">SIN INTERNET</text>
+
+                                    <path d="M260 70 H286" stroke="var(--sage)" stroke-width="1.3" stroke-dasharray="3 3"/>
+
+                                    <rect x="294" y="14" width="76" height="112" rx="8" stroke="var(--sage)" stroke-opacity="0.6"/>
+                                    <text x="304" y="32" font-family="monospace" font-size="7.5" fill="var(--sage)">ALERTA</text>
+                                    <circle cx="332" cy="70" r="16" stroke="var(--sage)" stroke-width="1.5"/>
+                                    <text x="323" y="73" font-family="monospace" font-size="7.5" fill="var(--sage)">SMS</text>
+                                    <text x="304" y="112" font-family="monospace" font-size="7" fill="currentColor" fill-opacity="0.6">FIRESTORE</text>
+                                </svg>
+                            </div>
+
+                            <span class="build-label">App Android · Seguridad Personal</span>
+                            <h3 class="build-title" data-arch="guardia">GuardIA</h3>
+                            <p class="build-desc">
+                                Aplicación Android de seguridad personal pensada para funcionar incluso sin conexión a internet, combinando lectura de sensores del teléfono con almacenamiento local en Room y alertas SMS automáticas.
+                            </p>
+                            <ul class="build-points">
+                                <li>Interfaz moderna en Kotlin y Jetpack Compose</li>
+                                <li>Funciona sin conexión gracias a Room y sincroniza con Firestore</li>
+                                <li>Detección por sensores de movimiento y disparo automático de SMS</li>
+                            </ul>
+                        </div>
+                        <div class="chips" style="margin-top: 1.25rem;">
+                            <span class="chip">Kotlin</span>
+                            <span class="chip">Jetpack Compose</span>
+                            <span class="chip">Room</span>
+                            <span class="chip">Firebase</span>
+                            <span class="chip">API 24+</span>
+                        </div>
+                    </article>
+
+                    <article class="build-card reveal">
+                        <div>
+                            <div class="sketch-box" aria-hidden="true">
+                                <div class="sketch-head">
+                                    <span>eventify.kt</span>
+                                    <span>mapas &amp; nube</span>
+                                </div>
+                                <svg class="sketch-svg" viewBox="0 0 380 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 38 H370 M10 75 H370 M10 112 H370 M85 10 V130 M190 10 V130 M295 10 V130" stroke="currentColor" stroke-opacity="0.1"/>
+                                    <path d="M32 120 L140 60 L240 85 L342 26" stroke="var(--sage)" stroke-width="1.6" fill="none"/>
+                                    <circle cx="140" cy="60" r="6" fill="var(--accent)"/>
+                                    <circle cx="140" cy="60" r="14" stroke="var(--accent)" stroke-opacity="0.45"/>
+                                    <circle cx="240" cy="85" r="5" fill="var(--sage)"/>
+                                    <rect x="156" y="38" width="118" height="24" rx="5" fill="var(--surface-card)" stroke="var(--accent)"/>
+                                    <text x="165" y="53" font-family="monospace" font-size="7.5" fill="var(--accent)">PUNTO DE ENCUENTRO</text>
+                                </svg>
+                            </div>
+
+                            <span class="build-label">App Android · Comunidad &amp; Mapas</span>
+                            <h3 class="build-title" data-arch="eventify">Eventify</h3>
+                            <p class="build-desc">
+                                Aplicación móvil para crear y descubrir eventos locales sobre un mapa interactivo, conectando ubicaciones en tiempo real con cuentas de usuario en la nube.
+                            </p>
+                            <ul class="build-points">
+                                <li>Trazado y ubicación de eventos con Google Maps SDK</li>
+                                <li>Inicio de sesión y gestión de usuarios con Firebase Auth</li>
+                                <li>Datos y notificaciones en vivo mediante Cloud Firestore</li>
+                            </ul>
+                        </div>
+                        <div class="chips" style="margin-top: 1.25rem;">
+                            <span class="chip">Kotlin</span>
+                            <span class="chip">Android Studio</span>
+                            <span class="chip">Maps SDK</span>
+                            <span class="chip">Firebase Auth</span>
+                            <span class="chip">Firestore</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAMINO: EXPERIENCIA Y FORMACIÓN -->
+        <section class="blog-section" id="camino">
+            <div class="container">
+                <span class="section-eyebrow">Trayectoria</span>
+                <h2 class="section-heading">Experiencia y estudios</h2>
+                <p class="section-intro">
+                    Un resumen de los lugares donde he colaborado y lo que sigo aprendiendo en la universidad.
+                </p>
+
+                <div class="path-grid">
+                    <div class="reveal">
+                        <h3 class="path-col-title">Experiencia laboral y de campo</h3>
+
+                        <div class="path-item">
+                            <div class="path-meta">KAOS Servicios Generales · Sector privado</div>
+                            <h3>Asistente Logístico</h3>
+                            <p>Control y registro de materiales, coordinación de despachos y seguimiento documentario para asegurar la entrega oportuna de los servicios.</p>
+                        </div>
+
+                        <div class="path-item">
+                            <div class="path-meta">ODPE Santa — ONPE · Chimbote</div>
+                            <h3>Operador de Centro de Cómputo</h3>
+                            <p>Soporte técnico, procesamiento de actas y cuidado de la continuidad operativa informática durante procesos electorales.</p>
+                        </div>
+
+                        <div class="path-item">
+                            <div class="path-meta">INEI · Provincia del Santa</div>
+                            <h3>Aplicador de Evaluaciones (ENLA)</h3>
+                            <p>Ejecución y control de calidad en operativos nacionales de evaluación educativa en instituciones de la provincia del Santa.</p>
+                        </div>
+                    </div>
+
+                    <div class="reveal">
+                        <h3 class="path-col-title">Formación académica</h3>
+
+                        <div class="path-item">
+                            <div class="path-meta">Universidad Nacional del Santa (UNS) · En curso</div>
+                            <h3>Ingeniería de Sistemas</h3>
+                            <p>Ingeniería de software, arquitectura de computadoras, redes, sistemas operativos y gestión de proyectos TI en Nuevo Chimbote.</p>
+                        </div>
+
+                        <div class="path-item">
+                            <div class="path-meta">Especialización Académica · UNS</div>
+                            <h3>Diseño de Infraestructura &amp; Data Center (ANSI/TIA-942-B)</h3>
+                            <p>Especificación técnica de centros de datos Rated 2, monitoreo de servidores con Zabbix y administración de entornos Linux virtualizados.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cert-strip reveal">
+                    <span class="cert-strip-label">Certificaciones obtenidas:</span>
+                    <div class="cert-badges">
+                        <span class="cert-pill">Scrum Fundamentals Certified (SCRUMstudy)</span>
+                        <span class="cert-pill">Six Sigma Yellow Belt</span>
+                        <span class="cert-pill">Cybersecurity &amp; Ethical Hacking (Cisco)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HERRAMIENTAS QUE USO -->
+        <section class="blog-section" id="herramientas">
+            <div class="container">
+                <span class="section-eyebrow">Tecnologías</span>
+                <h2 class="section-heading">Herramientas que uso en mis proyectos</h2>
+                <p class="section-intro">
+                    Lenguajes, frameworks y plataformas con los que trabajo habitualmente.
+                </p>
+
+                <div class="tools-wrap reveal">
+                    <span class="tool-tag">Kotlin</span>
+                    <span class="tool-tag">Jetpack Compose</span>
+                    <span class="tool-tag">Android Studio (API 24+)</span>
+                    <span class="tool-tag">PHP 8 &amp; Laravel</span>
+                    <span class="tool-tag">PostgreSQL</span>
+                    <span class="tool-tag">MySQL</span>
+                    <span class="tool-tag">Room &amp; Cloud Firestore</span>
+                    <span class="tool-tag">Docker &amp; Docker Compose</span>
+                    <span class="tool-tag">Linux Server</span>
+                    <span class="tool-tag">Google Cloud Platform</span>
+                    <span class="tool-tag">Zabbix Monitoring</span>
+                    <span class="tool-tag">HTML5, CSS3 &amp; JavaScript</span>
+                    <span class="tool-tag">Git &amp; GitHub</span>
+                    <span class="tool-tag">Vercel CI/CD</span>
+                    <span class="tool-tag">Scrum &amp; Six Sigma</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTO CERCANO -->
+        <section class="blog-section" id="contacto" style="border-bottom: none; padding-bottom: 2rem;">
+            <div class="container">
+                <div class="outro-card reveal">
+                    <div>
+                        <span class="section-eyebrow">Hablemos</span>
+                        <h2>¿Conversamos sobre tecnología, proyectos o cualquier idea?</h2>
+                        <p>
+                            Si tienes un proyecto en mente, buscas colaborar en desarrollo de software o simplemente quieres saludar, escríbeme por cualquiera de estos medios.
+                        </p>
+                    </div>
+
+                    <div class="contact-links">
+                        <div class="contact-item">
+                            <a href="mailto:cdelgadodepaz@gmail.com">cdelgadodepaz@gmail.com</a>
+                            <button class="copy-chip" type="button" data-copy="cdelgadodepaz@gmail.com" data-label="Correo copiado">Copiar</button>
+                        </div>
+                        <div class="contact-item">
+                            <a href="https://wa.me/51951791780" target="_blank" rel="noopener noreferrer">+51 951 791 780 (WhatsApp)</a>
+                            <button class="copy-chip" type="button" data-copy="+51951791780" data-label="Número copiado">Copiar</button>
+                        </div>
+                        <div class="contact-item">
+                            <a href="https://github.com/Carlos08179" target="_blank" rel="noopener noreferrer">github.com/Carlos08179</a>
+                            <span aria-hidden="true">↗</span>
+                        </div>
+                        <div class="contact-item">
+                            <a href="https://orcid.org/0009-0004-1704-463X" target="_blank" rel="noopener noreferrer">orcid.org/0009-0004-1704-463X</a>
+                            <span aria-hidden="true">↗</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span>© <span id="year">2026</span> Roberto Carlos Delgado Depaz · Nuevo Chimbote, Perú.</span>
+            <div class="footer-links">
+                <a href="https://www.uns.edu.pe/" target="_blank" rel="noopener noreferrer">UNS</a>
+                <a href="https://github.com/Carlos08179" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://orcid.org/0009-0004-1704-463X" target="_blank" rel="noopener noreferrer">ORCID</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Paleta de comandos -->
+    <div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="Buscador rápido">
+        <div class="palette-box">
+            <input class="palette-input" id="paletteInput" type="text" placeholder="Ir a una sección o ejecutar una acción…" autocomplete="off" aria-label="Buscar">
+            <ul class="palette-list" id="paletteList" role="listbox"></ul>
+            <div class="palette-foot">
+                <span><span class="kbd">↑</span> <span class="kbd">↓</span> mover</span>
+                <span><span class="kbd">Enter</span> abrir</span>
+                <span><span class="kbd">Esc</span> cerrar</span>
+            </div>
+        </div>
+    </div>
+
+    <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg>
+    </button>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+        (function () {
+            var root = document.documentElement;
+
+            /* Tema claro / oscuro */
+            document.getElementById('themeBtn').addEventListener('click', function () {
+                var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', next);
+                try { localStorage.setItem('theme', next); } catch (e) {}
+                var meta = document.querySelector('meta[name="theme-color"]');
+                if (meta) meta.setAttribute('content', next === 'dark' ? '#131210' : '#FAF8F5');
+            });
+
+            /* Menú móvil */
+            var menuBtn = document.getElementById('menuBtn');
+            var navLinks = document.getElementById('navLinks');
+            function closeMenu() { navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+            menuBtn.addEventListener('click', function () {
+                var open = navLinks.classList.toggle('open');
+                menuBtn.setAttribute('aria-expanded', String(open));
+            });
+            navLinks.addEventListener('click', function (e) { if (e.target.tagName === 'A') closeMenu(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+
+            /* Foto de respaldo */
+            var photo = document.querySelector('#photoCard img');
+            var card = document.getElementById('photoCard');
+            function noPhoto() { card.classList.add('no-img'); }
+            photo.addEventListener('error', noPhoto);
+            if (photo.complete && photo.naturalWidth === 0) noPhoto();
+
+            /* Año actual */
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            /* Copiar al portapapeles */
+            var toast = document.getElementById('toast');
+            var toastTimer;
+            function showToast(msg) {
+                toast.textContent = msg;
+                toast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2200);
+            }
+            function fallbackCopy(text) {
+                var ta = document.createElement('textarea');
+                ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+                document.body.appendChild(ta); ta.select();
+                var ok = false;
+                try { ok = document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(ta);
+                return ok;
+            }
+            document.querySelectorAll('[data-copy]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var text = btn.getAttribute('data-copy');
+                    var label = btn.getAttribute('data-label');
+                    if (navigator.clipboard && window.isSecureContext) {
+                        navigator.clipboard.writeText(text).then(function () { showToast(label); }, function () {
+                            showToast(fallbackCopy(text) ? label : 'No se pudo copiar');
+                        });
+                    } else {
+                        showToast(fallbackCopy(text) ? label : 'No se pudo copiar');
+                    }
+                });
+            });
+
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            /* Barra de lectura + volver arriba */
+            var bar = document.getElementById('progressBar');
+            var toTop = document.getElementById('toTop');
+            function onScroll() {
+                var h = document.documentElement.scrollHeight - window.innerHeight;
+                bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(window.scrollY / h, 1) : 0) + ')';
+                toTop.classList.toggle('show', window.scrollY > 650);
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+            toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+
+            /* Diagramas de arquitectura desplegables */
+            var ARCH = {
+                servicecloud: {
+                    nodes: [['Navegador Web', 'Cada empresa en su espacio aislado'], ['Laravel 13 · PHP 8.4', 'Roles, tickets y control de SLAs'], ['PostgreSQL 17', 'Base de datos relacional']],
+                    note: 'Empaquetado con Docker Compose sobre servidor Linux VPS'
+                },
+                guardia: {
+                    nodes: [['Jetpack Compose', 'Interfaz y lectura de sensores'], ['Room Database', 'Guarda datos aunque no haya señal'], ['Cloud Firestore', 'Sincroniza en la nube al volver la red']],
+                    note: 'Arquitectura limpia · Envío automático de alertas SMS'
+                },
+                eventify: {
+                    nodes: [['App Android', 'Kotlin · Google Maps SDK'], ['Firebase Auth', 'Cuentas de usuario'], ['Cloud Firestore', 'Eventos y ubicaciones en vivo']],
+                    note: 'Mapas interactivos y sincronización en tiempo real'
+                }
+            };
+            document.querySelectorAll('[data-arch]').forEach(function (h3, i) {
+                var data = ARCH[h3.getAttribute('data-arch')];
+                var container = h3.parentElement;
+                if (!data || !container) return;
+                var id = 'arch-' + i;
+                var btn = document.createElement('button');
+                btn.type = 'button'; btn.className = 'arch-toggle';
+                btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-controls', id);
+                btn.innerHTML = '<span>Ver cómo funciona por dentro</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+                var box = document.createElement('div');
+                box.className = 'arch'; box.id = id; box.hidden = true;
+                var flow = document.createElement('div'); flow.className = 'arch-flow';
+                data.nodes.forEach(function (n, k) {
+                    if (k) { var a = document.createElement('div'); a.className = 'arch-arrow'; a.textContent = '↓'; flow.appendChild(a); }
+                    var d = document.createElement('div'); d.className = 'arch-node';
+                    var b = document.createElement('b'); b.textContent = n[0];
+                    var s = document.createElement('small'); s.textContent = n[1];
+                    d.appendChild(b); d.appendChild(s); flow.appendChild(d);
+                });
+                var note = document.createElement('div'); note.className = 'arch-note'; note.textContent = data.note;
+                box.appendChild(flow); box.appendChild(note);
+                btn.addEventListener('click', function () {
+                    var open = box.hidden;
+                    box.hidden = !open;
+                    btn.setAttribute('aria-expanded', String(open));
+                    btn.firstChild.textContent = open ? 'Ocultar esquema' : 'Ver cómo funciona por dentro';
+                });
+                container.appendChild(btn); container.appendChild(box);
+            });
+
+            /* Versión imprimible */
+            document.querySelectorAll('[data-action="print"]').forEach(function (b) {
+                b.addEventListener('click', function () { window.print(); });
+            });
+
+            /* Paleta de comandos (Ctrl/Cmd + K) */
+            var palette = document.getElementById('palette');
+            var pInput = document.getElementById('paletteInput');
+            var pList = document.getElementById('paletteList');
+            var pIndex = 0, pShown = [];
+            function go(id) { var el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }
+            var COMMANDS = [
+                { l: 'Inicio', h: 'Sección', run: function () { go('inicio'); } },
+                { l: 'Sobre mí', h: 'Sección', run: function () { go('sobre-mi'); } },
+                { l: 'Hobbies y tiempo libre', h: 'Personal', run: function () { go('bitacora'); } },
+                { l: 'Proyectos de software', h: 'Código', run: function () { go('proyectos'); } },
+                { l: 'Experiencia y estudios', h: 'Trayectoria', run: function () { go('camino'); } },
+                { l: 'Herramientas y tecnologías', h: 'Stack', run: function () { go('herramientas'); } },
+                { l: 'Charlemos (contacto)', h: 'Contacto', run: function () { go('contacto'); } },
+                { l: 'Cambiar luz / modo nocturno', h: 'Acción', run: function () { document.getElementById('themeBtn').click(); } },
+                { l: 'Copiar correo electrónico', h: 'Acción', run: function () { document.querySelector('[data-copy^="cdelgado"]').click(); } },
+                { l: 'Imprimir o guardar en PDF', h: 'Acción', run: function () { window.print(); } },
+                { l: 'Ir a GitHub', h: 'Enlace', run: function () { window.open('https://github.com/Carlos08179', '_blank', 'noopener'); } },
+                { l: 'Ir a ORCID', h: 'Enlace', run: function () { window.open('https://orcid.org/0009-0004-1704-463X', '_blank', 'noopener'); } }
+            ];
+            function renderPalette() {
+                var q = pInput.value.trim().toLowerCase();
+                pShown = COMMANDS.filter(function (c) { return !q || c.l.toLowerCase().indexOf(q) !== -1 || c.h.toLowerCase().indexOf(q) !== -1; });
+                if (pIndex >= pShown.length) pIndex = 0;
+                pList.innerHTML = '';
+                if (!pShown.length) { pList.innerHTML = '<div class="palette-empty">Sin resultados</div>'; return; }
+                pShown.forEach(function (c, i) {
+                    var li = document.createElement('li');
+                    li.setAttribute('role', 'option');
+                    if (i === pIndex) li.className = 'active';
+                    var s1 = document.createElement('span'); s1.textContent = c.l;
+                    var s2 = document.createElement('small'); s2.textContent = c.h;
+                    li.appendChild(s1); li.appendChild(s2);
+                    li.addEventListener('mousemove', function () { if (pIndex !== i) { pIndex = i; renderPalette(); } });
+                    li.addEventListener('click', function () { runCmd(c); });
+                    pList.appendChild(li);
+                });
+                var act = pList.querySelector('.active');
+                if (act && act.scrollIntoView) act.scrollIntoView({ block: 'nearest' });
+            }
+            function openPalette() { palette.classList.add('open'); pInput.value = ''; pIndex = 0; renderPalette(); setTimeout(function () { pInput.focus(); }, 0); }
+            function closePalette() { palette.classList.remove('open'); }
+            function runCmd(c) { closePalette(); closeMenu(); setTimeout(c.run, 60); }
+            document.getElementById('paletteBtn').addEventListener('click', openPalette);
+            palette.addEventListener('click', function (e) { if (e.target === palette) closePalette(); });
+            pInput.addEventListener('input', function () { pIndex = 0; renderPalette(); });
+            document.addEventListener('keydown', function (e) {
+                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); palette.classList.contains('open') ? closePalette() : openPalette(); return; }
+                if (!palette.classList.contains('open')) return;
+                if (e.key === 'Escape') closePalette();
+                else if (e.key === 'ArrowDown') { e.preventDefault(); pIndex = (pIndex + 1) % Math.max(pShown.length, 1); renderPalette(); }
+                else if (e.key === 'ArrowUp') { e.preventDefault(); pIndex = (pIndex - 1 + pShown.length) % Math.max(pShown.length, 1); renderPalette(); }
+                else if (e.key === 'Enter' && pShown[pIndex]) { e.preventDefault(); runCmd(pShown[pIndex]); }
+            });
+
+            /* Animaciones de aparición + sección activa */
+            var reveals = document.querySelectorAll('.reveal');
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (en) {
+                        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+                    });
+                }, { threshold: 0.1 });
+                reveals.forEach(function (el) { io.observe(el); });
+
+                var links = {};
+                document.querySelectorAll('.nav-links a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+                var spy = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (en) {
+                        if (en.isIntersecting && links[en.target.id]) {
+                            Object.keys(links).forEach(function (k) { links[k].classList.remove('active'); links[k].removeAttribute('aria-current'); });
+                            links[en.target.id].classList.add('active');
+                            links[en.target.id].setAttribute('aria-current', 'true');
+                        }
+                    });
+                }, { rootMargin: '-40% 0px -50% 0px' });
+                Object.keys(links).forEach(function (id) {
+                    var s = document.getElementById(id);
+                    if (s) spy.observe(s);
+                });
+            } else {
+                reveals.forEach(function (el) { el.classList.add('in'); });
+            }
+        })();
+    </script>
+</body>
+</html>
